@@ -15,7 +15,7 @@ checked for data. If the transient has data, then it is returned, but if the
 transient has expired, then the `$hook` is scheduled using `wp_schedule_single_event`. 
 The fallback transient is then checked for data. If the fallback transient has data, 
 then it is returned, but if the fallback transient has expired, then `false` is 
-returned. Meanwhile, the `$hook` is running in the background to update both 
+returned. Meanwhile, the `$hook` is scheduled to run in the background to update both 
 transients with new data.
 
 ## Example of adding it to a Plugin
