@@ -48,7 +48,7 @@ $ft_transient_fallback->get_transient( $transient, $hook, $args );
 ```
 
 * `$transient` is the name of the transient.
-* `$hook` is the name of the hook to call if the transient has expired.
+* `$hook` is the name of the hook to call if the transient has expired. The function that `$hook` references needs to be registered with `add_action`.
 * `$args` are the arguments to pass to the `$hook`.
 
 #### Setting a Transient
