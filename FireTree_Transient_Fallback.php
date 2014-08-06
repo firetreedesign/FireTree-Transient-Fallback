@@ -1,5 +1,5 @@
 <?php
-if ( ! class_exists( 'FireTree_Transient_Cache' ) ) {
+if ( ! class_exists( 'FireTree_Transient_Fallback' ) ) {
 	
 	/**
 	 * Adds a fallback layer to the transient data that allows a background hook
@@ -8,7 +8,7 @@ if ( ! class_exists( 'FireTree_Transient_Cache' ) ) {
 	 * @author Daniel Milner
 	 * @version 1.0.0
 	 */
-	class FireTree_Transient_Cache {
+	class FireTree_Transient_Fallback {
 		
 		private $prefix;
 		private $fallback_expiration;
@@ -63,13 +63,16 @@ if ( ! class_exists( 'FireTree_Transient_Cache' ) ) {
 			
 			if ( false === ( $data = get_transient( $transient ) ) ) {
 				
-				wp_schedule_single_event( time(), $hook, $args );
 
 				if ( false === ( $data = get_transient( $fallback_transient ) ) ) {
 					
 					// Do nothing
 					
-				} 			
+				} else {
+
+					wp_schedule_single_event( time(), $hook, $args );
+				
+				}
 				
 				return $data;
 
