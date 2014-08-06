@@ -3,9 +3,9 @@ FireTree-Transient-Cache
 
 Adds a fallback layer to the transient data that allows a background hook to update the transient without the end user having to wait.
 
-== Example of adding it to a Plugin ==
+## Example of adding it to a Plugin
 
-'''php
+```php
 /**
  * Setup FireTree Transient Caching
  */
@@ -15,4 +15,4 @@ $ft_transient_cache_args = array(
 	'cleanup'	=> true
 );
 $ft_transient_cache = new FireTree_Transient_Cache( $ft_transient_cache_args );
-'''
+```
