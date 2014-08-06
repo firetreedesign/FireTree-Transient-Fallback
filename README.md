@@ -1,7 +1,22 @@
 FireTree-Transient-Fallback
 ===========================
 
-Adds a fallback layer to the transient data that allows a background hook to update the transient without the end user having to wait.
+Adds a fallback layer to the transient data that allows a background hook to update 
+the transient without the end user having to wait.
+
+## How does it work?
+
+When `->set_transient( $transient, $value, $expiration )` is called, two transients 
+are set. One that expires at the time you specified and another that expires at the 
+`fallback_expiration` that was set when the class was initialized.
+
+When `->get_transient( $transient, $hook, $args )` is called, the transient is 
+checked for data. If the transient has data, then it is returned, but if the 
+transient has expired, then the `$hook` is scheduled using `wp_schedule_single_event`. 
+The fallback transient is then checked for dats. If the fallback transient has data, 
+then it is returned, but if the fallback transient has expired, then `false` is 
+returned. Meanwhile, the `$hook` is running in the background to update both 
+transients with new data.
 
 ## Example of adding it to a Plugin
 
