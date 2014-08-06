@@ -13,7 +13,7 @@ are set. One that expires at the time you specified and another that expires at 
 When `->get_transient( $transient, $hook, $args )` is called, the transient is 
 checked for data. If the transient has data, then it is returned, but if the 
 transient has expired, then the `$hook` is scheduled using `wp_schedule_single_event`. 
-The fallback transient is then checked for dats. If the fallback transient has data, 
+The fallback transient is then checked for data. If the fallback transient has data, 
 then it is returned, but if the fallback transient has expired, then `false` is 
 returned. Meanwhile, the `$hook` is running in the background to update both 
 transients with new data.
