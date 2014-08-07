@@ -62,3 +62,7 @@ $ft_transient_fallback->set_transient( $transient, $value, $expiration );
 * `$transient` is the name of the transient.
 * `$value` is the transient value.
 * `$expiration` is how long you want the transient to live. In minutes.
+
+## License
+
+The FireTree_Transient_Fallback class is licensed under the GPL v2 or later.
