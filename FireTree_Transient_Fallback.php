@@ -6,7 +6,7 @@ if ( ! class_exists( 'FireTree_Transient_Fallback' ) ) {
 	 * to update the transient without the end user having to wait.
 	 * 
 	 * @author Daniel Milner
-	 * @version 1.0.0
+	 * @version 1.0.1
 	 */
 	class FireTree_Transient_Fallback {
 		
@@ -38,8 +38,9 @@ if ( ! class_exists( 'FireTree_Transient_Fallback' ) ) {
 				
 				// If the cleanup hook is not scheduled, then add a one-time event.
 				// This is done in order to avoid having to hook into plugin activate/deactive.
-				if ( false === wp_get_schedule( 'firetree_transient_cache_cleanup' ) ) {
-					wp_schedule_single_event( time() + 86400, 'firetree_transient_cache_cleanup' );
+				if ( ! wp_get_schedule( 'firetree_transient_cache_cleanup' ) ) {
+					wp_clear_scheduled_hook( 'firetree_transient_cache_cleanup' );
+					wp_schedule_event( time(), 'daily', 'firetree_transient_cache_cleanup' );
 				}
 			
 			}
@@ -70,6 +71,7 @@ if ( ! class_exists( 'FireTree_Transient_Fallback' ) ) {
 					
 				} else {
 
+					wp_clear_scheduled_hook( $hook, $args );
 					wp_schedule_single_event( time(), $hook, $args );
 				
 				}
