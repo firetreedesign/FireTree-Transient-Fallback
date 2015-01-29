@@ -6,7 +6,7 @@ if ( ! class_exists( 'FireTree_Transient_Fallback' ) ) {
 	 * to update the transient without the end user having to wait.
 	 * 
 	 * @author Daniel Milner
-	 * @version 1.0.1
+	 * @version 1.0.2
 	 */
 	class FireTree_Transient_Fallback {
 		
@@ -63,18 +63,11 @@ if ( ! class_exists( 'FireTree_Transient_Fallback' ) ) {
 			$fallback_transient	= $transient . '_';
 			
 			if ( false === ( $data = get_transient( $transient ) ) ) {
-				
 
-				if ( false === ( $data = get_transient( $fallback_transient ) ) ) {
-					
-					// Do nothing
-					
-				} else {
+				$data = get_transient( $fallback_transient );
 
-					wp_clear_scheduled_hook( $hook, $args );
-					wp_schedule_single_event( time(), $hook, $args );
-				
-				}
+				wp_clear_scheduled_hook( $hook, $args );
+				wp_schedule_single_event( time(), $hook, $args );
 				
 				return $data;
 
